@@ -1,0 +1,12 @@
+
+
+<h1> Welcome, <%= current_user.username %> </h1>
+
+
+
+<% @channels.collect do |channel| %>
+
+	<p><a href='channel/<%=channel.id%>'> 
+	<%= channel.title %></p>
+	<%end %>
+
