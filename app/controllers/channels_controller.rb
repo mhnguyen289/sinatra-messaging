@@ -10,9 +10,6 @@ class ChannelsController < ApplicationController
 		end
 	end
 
-	# post '/channels' do
-	# 	binding.pry
-	# end
 
 	get '/channels/new' do 
 		if logged_in?
@@ -43,10 +40,12 @@ class ChannelsController < ApplicationController
 	end
 
 	post '/channel/:id' do 
-		binding.pry
-		if params[:content] != ""
-			@content = current_user.channels.create(:content=>params[:content])
-			redirect '/channels'
+		
+		
+		if params[:message] != ""
+		@channel = Channel.find(params[:id])
+		@channel.messages.create(:content=>params[:content], :username => current_user.username, :user_id => current_user.id)
+			redirect "/channel/#{@channel.id}"
 		else
 			redirect '/channels/show'
 		end

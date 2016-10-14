@@ -1,8 +1,14 @@
 
 
-<%@channels.each do |channel|%>
-	
-	<%= channel.messages %>
-	<%end%>
+
+<%@user.messages.collect do |message|%>
+
+<p><%="#{message.username}: #{message.content}"%></p>
+<%end%>
+
+<form action='/channel/message/<%=@user.id %>' method='POST'>
+<label>Content: </label><br><br><input id="content" type='text' name="content"><br><br>
 
 
+
+<input type="submit" value="submit">
