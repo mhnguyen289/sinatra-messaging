@@ -16,15 +16,19 @@
 					<a href="/channels/<%=channel.id%>"><%= channel.title %></a>
 				<% end %>
 
-				<button>Create Thread</button>
+				<a href="/channels/new"> <button>Create Thread</button></a>
 			</ul>
 			<hr />
 			<h2>Private Threads</h2>
 			<ul>
 			
-			<% User.all.collect do |user| %>
 			
+			<% User.all.each do |user| %>
+				
+				<% if  user.username != current_user.username %>
 			 <p><%= user.username %> <a href="/messages/<%=user.id%>"><button>DM</button></a></p>
+			 <%end%>
+			<%end%>
 			<%end%>
 			</ul>
 		</div>

@@ -16,11 +16,11 @@ class MessagesController < ApplicationController
 		end
 	end
 
-	post '/messages/messages/:id' do
-		binding.pry
+	post '/messages/:id' do
+
 		@user = User.find(params[:id])
 		if logged_in?
-			@user.messages.create(:content=>params[:content], :username => current_user.username)
+			@user.messages.create(:content=>params[:content], :username => current_user.username )
 			erb :'messages/messages'
 		else
 			redirect 'channels/channels'

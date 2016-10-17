@@ -48,7 +48,7 @@ class ChannelsController < ApplicationController
 		
 		if params[:message] != ""
 		@channel = Channel.find(params[:id])
-		@channel.messages.create(:content=>params[:content], :user_id => current_user.id)
+		@channel.messages.create(:content=>params[:content])#, :user_id => current_user.id)
 			redirect "/channels/#{@channel.id}"
 		else
 			redirect '/channels/show'

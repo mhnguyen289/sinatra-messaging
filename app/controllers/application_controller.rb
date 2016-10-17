@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
 			Channel.where("channel_type= ?", "private")
 		end
 
-		
+
 	end
 
 	get '/' do 
