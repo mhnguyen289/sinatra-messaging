@@ -3,8 +3,7 @@ class CreateChannels < ActiveRecord::Migration
   	create_table :channels do |t|
   		t.string :title
   		t.text :content
-  		t.integer :user_id
-  		t.references :message, index: true, foreign_key: true
+  	   t.string :channel_type
   	end
   end
 end

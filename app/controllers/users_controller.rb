@@ -47,5 +47,19 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:id' do
+  	erb :'users/show'
+  end
+
+  # A users splashpage 
+
+  # Show a users friends list 
+    # Show their friends name 
+    # show private channel button if their is a private channel 
+    # show a button to create a private channel if there is no active private channel 
+    # show a button to close a private channel if there is one active 
+
+
+
 
 end

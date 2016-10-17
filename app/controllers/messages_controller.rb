@@ -2,6 +2,32 @@
 
 class MessagesController < ApplicationController
 
+	get '/messages' do
+		erb :'messages/messages'
+	end
+
+	get '/messages/:id' do
+
+		@user = User.find(params[:id])
+		if logged_in?	
+			erb :"/messages/messages"
+		else
+			redirect '/channels'
+		end
+	end
+
+	post '/messages/messages/:id' do
+		binding.pry
+		@user = User.find(params[:id])
+		if logged_in?
+			@user.messages.create(:content=>params[:content], :username => current_user.username)
+			erb :'messages/messages'
+		else
+			redirect 'channels/channels'
+		end
+	end
+
+
 	get '/channel/message/:id' do
 		@user = User.find(params[:id])
 		if logged_in?
@@ -13,8 +39,8 @@ class MessagesController < ApplicationController
 
 	post '/channel/message/:id' do
 		if params[:content] != ""
-			@user = User.find(params[:id])
-			@user.messages.update(:content=>params[:content])
+			@user = User.all.find(params[:id])
+			@user.messages.create(:content=>params[:content], :username => current_user.username)
 
 			redirect "/channel/message/#{@user.id}"
 		else
@@ -23,19 +49,3 @@ class MessagesController < ApplicationController
 	end
 
 end
-
-
-
-
-# post '/channel/:id' do 
-		
-		
-# 		if params[:message] != ""
-# 		@channel = Channel.find(params[:id])
-# 		@channel.messages.create(:content=>params[:content], :username => current_user.username, :user_id => current_user.id)
-# 			redirect "/channel/#{@channel.id}"
-# 		else
-# 			redirect '/channels/show'
-# 		end
-# 	end
-

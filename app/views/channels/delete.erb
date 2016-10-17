@@ -1,0 +1,8 @@
+
+<h2>Are you sure you want to delete this channel? </h2>
+<h3>Title: <em><%= @channel.title %></em></h3>
+
+
+<form action='/channels/<%= @channel.id %>/delete' method='POST'>
+  <input type='submit' value='Delete Channel'>
+</form>

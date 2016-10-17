@@ -10,6 +10,10 @@ class ChannelsController < ApplicationController
 		end
 	end
 
+	# post '/channels' do
+	# 	@channel = Channel.find(params[:id])
+	# end
+ 
 
 	get '/channels/new' do 
 		if logged_in?
@@ -29,7 +33,7 @@ class ChannelsController < ApplicationController
 		end
 	end
 
-	get '/channel/:id' do 
+	get '/channels/:id' do 
 
 		@channel = Channel.find(params[:id])
 		if logged_in?
@@ -39,16 +43,42 @@ class ChannelsController < ApplicationController
 		end
 	end
 
-	post '/channel/:id' do 
+	post '/channels/:id' do 
 		
 		
 		if params[:message] != ""
 		@channel = Channel.find(params[:id])
-		@channel.messages.create(:content=>params[:content], :username => current_user.username, :user_id => current_user.id)
-			redirect "/channel/#{@channel.id}"
+		@channel.messages.create(:content=>params[:content], :user_id => current_user.id)
+			redirect "/channels/#{@channel.id}"
 		else
 			redirect '/channels/show'
 		end
+	end
+
+	get '/channels/:id/edit' do
+		
+		if logged_in?
+			@channel = Channel.find(params[:id])
+			
+			erb :'channels/edit'
+		else
+			redirect '/login'
+		end
+	end
+	
+	get '/channels/:id/delete' do
+		if logged_in?
+			@channel = Channel.find(params[:id])
+			erb :'channels/delete'
+		else
+			redirect '/login'
+		end
+	end
+
+	post '/channels/:id/delete' do
+		@channel = Channel.find(params[:id])
+		@channel.delete
+		redirect '/channels'
 	end
 
 end

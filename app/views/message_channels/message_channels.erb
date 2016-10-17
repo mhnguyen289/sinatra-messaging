@@ -3,7 +3,7 @@
 
 <%@user.messages.collect do |message|%>
 
-<p><%="#{message.username}: #{message.content}"%></p>
+<p><%="#{message.username}:"%> <%="#{message.content}"%></p>
 <%end%>
 
 <form action='/channel/message/<%=@user.id %>' method='POST'>
@@ -12,3 +12,5 @@
 
 
 <input type="submit" value="submit">
+
+

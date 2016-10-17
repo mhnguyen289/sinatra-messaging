@@ -1,29 +1,22 @@
-<!-- 
 
-
-<form class= "ui form"
-		action="channels"
-		method= "post">
-
-		<div class="field">
-			<label for="description">Description</label>
-			<textarea type= "text"
-						 rows= "2"
-						 cols= "40"
-						 placeholder="Description goes here">
-						 </textarea>
-		</div> -->
-		
 <h3>Title: <em><%= @channel.title %></em></h3>
-<h3>Content:<% @channel.messages.collect do |channel_messages| %>
-	
-	<p><a href="message/<%=channel_messages.user_id%>"> <%= "#{channel_messages.username}: "%> </a><%="#{channel_messages.content}" %></p>
 
-	<%end%>
-	</h3>
+<ol>
+	<% @channel.messages.each do |message| %>
+		<li><%= message.content%> | <%=message.user.username%></li>
+	<% end %>
+</ol>
 
 
-<form action='/channel/<%=@channel.id %>' method='POST'>
+
+
+<form action='/channels/<%=@channel.id %>' method='POST'>
 <label>Content: </label><br><br><input id="content" type='text' name="content"><br><br>
 
+<h3><a href="/channels/<%=@channel.id%>/edit">(edit)</a>
+<a href="/channels/<%=@channel.id%>/delete">(delete)</h3></a>	
+
 <input type="submit" value="submit">
+
+
+

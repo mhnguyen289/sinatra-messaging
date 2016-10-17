@@ -4,32 +4,41 @@
 	<title>Messaging Application</title>
 </head>
 <body>
-	<nav>
-		<% if logged_in? %>
-			<a href="/channels/new"><button type="submit">Create a new channel thread</button></a>&nbsp
-			<a href="/logout"><button type="submit">LOG OUT</button></a>
-			<p id='user-id'> Logged In As: <%= current_user.username %></p>
-		<% else %>
-			<a href='/signup'><button type="submit">Create A User</button></a>&nbsp
-			<a href='/login'><button type="submit">LOG IN</button></a>
-		<% end %>
-	</nav>
+	<% if logged_in? %>
+		<div style="background-color: blue; width: 100%; height: 50px; color: white">
+			<p><%= current_user.username %>'s chat page</p> 
+			<a href="/logout"><button type="submit">Log Out</button></a>
+		</div>
+		<div style="width: 15vw; background-color: green; color: white; height: 100vh; float: left">
+			<h2>public threads</h2>
+			<ul>
+				<% public_channels.each do |channel| %>
+					<a href="/channels/<%=channel.id%>"><%= channel.title %></a>
+				<% end %>
 
-	<div class='container'>
-		<h1><a href="/">Messaging app</a></h1>
-	</div>
+				<button>Create Thread</button>
+			</ul>
+			<hr />
+			<h2>Private Threads</h2>
+			<ul>
+			
+			<% User.all.collect do |user| %>
+			
+			 <p><%= user.username %> <a href="/messages/<%=user.id%>"><button>DM</button></a></p>
+			<%end%>
+			</ul>
+		</div>
 
-	<div class='container'>
-		<% if !@error_message.nil? %>
-		<div class="alert">
-			<%= @error_message %>
-		<div>
-		<% end %>
-	</div>
-
-	<div class="container">
-		<%= yield %>
-	</div>
+		<div style="width: 80vw; height: 100vh; float: left">
+			<%= yield %>
+		</div>
+	<% else %>
+		<a href='/signup'><button type="submit">Create A User</button></a>&nbsp
+		<a href='/login'><button type="submit">Log In</button></a>
+		<div style="width: 80vw; height: 100vh; float: left">
+			<%= yield %>
+		</div>
+	<% end %>
 
 </body>
 </html>

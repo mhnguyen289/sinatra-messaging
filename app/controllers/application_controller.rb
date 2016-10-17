@@ -15,10 +15,24 @@ class ApplicationController < Sinatra::Base
 		def current_user
 		  @current_user ||= User.find(session[:id])
 		end
+
+		def error
+			@error_message = params[:error]
+		end
+
+		def public_channels 
+			Channel.where("channel_type = ?", "public")
+		end
+
+		def private_channels
+			Channel.where("channel_type= ?", "private")
+		end
+
+		
 	end
 
 	get '/' do 
-		redirect '/channels'
+		erb :'channels/channels'
 	end
 
 end
