@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Messaging Application</title>
+
+  <!-- Styles -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <title>Messaging Application</title>
 </head>
+
+
 <body>
-	<% if logged_in? %>
-		<div style="background-color: blue; width: 100%; height: 50px; color: white">
-			<p><%= current_user.username %>'s chat page</p> 
-			<a href="/logout"><button type="submit">Log Out</button></a>
-		</div>
-		<div style="width: 15vw; background-color: green; color: white; height: 100vh; float: left">
-			<h2>public threads</h2>
-			<ul>
-				<% public_channels.each do |channel| %>
-					<a href="/channels/<%=channel.id%>"><%= channel.title %></a>
-				<% end %>
 
-				<a href="/channels/new"> <button>Create Thread</button></a>
-			</ul>
-			<hr />
-			<h2>Private Threads</h2>
-			<ul>
-			
-			
-			<% User.all.each do |user| %>
-				
-				<% if  user.username != current_user.username %>
-			 <p><%= user.username %> <a href="/messages/<%=user.id%>"><button>DM</button></a></p>
-			 <%end%>
-			<%end%>
-			<%end%>
-			</ul>
-		</div>
+ <!-- Navigation -->
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Messaging App</span>
+        
+      </button>
 
-		<div style="width: 80vw; height: 100vh; float: left">
-			<%= yield %>
-		</div>
-	<% else %>
-		<a href='/signup'><button type="submit">Create A User</button></a>&nbsp
-		<a href='/login'><button type="submit">Log In</button></a>
-		<div style="width: 80vw; height: 100vh; float: left">
-			<%= yield %>
-		</div>
-	<% end %>
+    </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <a class="navbar-brand" href="/channels">Messaging app</a>
+      <ul class="nav navbar-nav pull-right">
+        <% if logged_in? %>
+        <li>
+          <a href="/channels"> Hi, <%= "#{current_user.username}" %></a>
+        </li>
+        <li>
+          <a href="/logout">Logout</a>
+        </li>
+        <% else %>
+        <li>
+          <a href="/login">Log in </a>
+        </li>
+        <li>
+          <a href="/signup">Sign up</a>
+        </li>
+        <% end %>
+        <li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
 </body>
 </html>
+
+
+

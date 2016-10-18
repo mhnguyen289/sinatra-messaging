@@ -20,13 +20,13 @@ class ApplicationController < Sinatra::Base
 			@error_message = params[:error]
 		end
 
-		def public_channels 
-			Channel.where("channel_type = ?", "public")
-		end
+		# def public_channels 
+		# 	Channel.where("channel_type = ?", "public")
+		# end
 
-		def private_channels
-			Channel.where("channel_type= ?", "private")
-		end
+		# def private_channels
+		# 	Channel.where("channel_type= ?", "private")
+		# end
 
 
 	end

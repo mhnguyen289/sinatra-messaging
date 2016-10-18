@@ -13,16 +13,22 @@
 ActiveRecord::Schema.define(version: 20161010223153) do
 
   create_table "channels", force: :cascade do |t|
-    t.string "title"
-    t.text   "content"
-    t.string "channel_type"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["recipient_id"], name: "index_channels_on_recipient_id"
+    t.index ["sender_id"], name: "index_channels_on_sender_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.string  "content"
-    t.string  "username"
-    t.integer "user_id"
-    t.integer "channel_id"
+    t.text     "body"
+    t.integer  "channel_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_messages_on_channel_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

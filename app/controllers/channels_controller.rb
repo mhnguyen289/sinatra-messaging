@@ -1,19 +1,13 @@
 class ChannelsController < ApplicationController
 
 	get '/channels' do 
-		@channels = Channel.all
+		
 		if logged_in?
-			# @user = find_by(session[:id])
 			erb :'channels/channels'
 		else
 			redirect '/login'
 		end
 	end
-
-	# post '/channels' do
-	# 	@channel = Channel.find(params[:id])
-	# end
- 
 
 	get '/channels/new' do 
 		if logged_in?
@@ -48,7 +42,7 @@ class ChannelsController < ApplicationController
 		
 		if params[:message] != ""
 		@channel = Channel.find(params[:id])
-		@channel.messages.create(:content=>params[:content])#, :user_id => current_user.id)
+		@channel.messages.create(:content=>params[:content])
 			redirect "/channels/#{@channel.id}"
 		else
 			redirect '/channels/show'
