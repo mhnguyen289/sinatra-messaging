@@ -5,6 +5,4 @@ User.create(username: "eddie_alveraez", email: 'e_alveraz@gmail.com', password_d
 User.create(username: "meisha_tate", email:'m_tate@gmail.com', password_digest: "minh8989")
 User.create(username: "minh_minh", email:'minh_minh@gmail.com', password_digest: "minh8989")
 
-Channel.create(title: "fight card for today")
-Channel.create(title: "Simple Programming")
-Channel.create(title: "MLB Postseason")
+

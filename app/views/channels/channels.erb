@@ -22,7 +22,7 @@
               </thead>
               <tbody>
                 <% User.all.each_with_index do |user, index| %>
-                <% if  user.username != current_user.username %>
+                <% if user.username != current_user.username %>
                 <tr>
                   <td><%= index +=1 %></td>
                   <td><%= user.username %></td>                                  
@@ -38,26 +38,26 @@
           </div>
         </div>
 
-        <hr>
+<!--         <hr>
         <h3>Your Conversations</h3>
 
         <div style="height: 400px; overflow-y: auto;">
-          <% if Channel.all.any? %>
+          if Channel.all.any?
           <ul class="media-list">
-            <% Channel.all.each do |conversation| %>
+            <Channel.all.each do |conversation| 
             <li class="media">
-              <%= image_tag("http://placehold.it/50x50", class: "media-object pull-left") %>
+               image_tag("http://placehold.it/50x50", class: "media-object pull-left") 
               <div class="media-body">
                 <a class="conversation" data-cid="1" href="/conversations/1"></a>
-                <p><%= conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45) %></p>
+                <p> conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45)</p>
               </div>
             </li>
 
-            <% end %>
+            end 
           </ul>
-          <% else %>
+           else 
           <p>You have no conversations. Click send message with any user to create one.</p>
-          <% end %>
+          <end 
         </div>
 
       </div>
@@ -66,7 +66,7 @@
 
       </div>
 
-    </div>
+    </div> -->
     
     
     <% end %>
